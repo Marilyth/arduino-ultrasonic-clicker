@@ -1,7 +1,7 @@
 #include <HCSR04.h>
 #include <Wire.h>
 
-UltraSonicDistanceSensor distanceSensor(2, 3, 400);  // Initialize sensor that uses digital pins 13 and 12.
+UltraSonicDistanceSensor distanceSensor(2, 3, 400);  // Initialize sensor that uses trigger pin 2 and echo pin 3.
 int buzzerPin = 12;
 
 void setup() {
@@ -15,7 +15,7 @@ void loop() {
 
   double closeness = 1.0 - (value / 400);
   if(closeness > 0.65)
-    click(1.0 - (value / 400));
+    click(closeness);
   
   delay(50);
   // Wait longer the further away. Clicking faster the closer.
